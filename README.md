@@ -26,8 +26,6 @@ where $b_p$ is a shared, nonnegative spatial background field, $a_c$ is its chan
 
 The implementation in [`method.py`](method.py) first performs robust per-channel normalization. It then alternates between lower-quantile estimates of the spatial field and channel coefficients, applies TV regularization to the spatial field, and reconstructs a nonnegative background estimate for each channel. The estimated background is bounded by the observed intensity before subtraction. The final corrected image and estimated background are returned in the original intensity scale.
 
-> **Interpretation:** The estimated shared component is a *model-based background estimate*. It should not be interpreted as a direct measurement of the true AF contribution in every channel. Strong biological signals shared across channels, or marker signals near the background level, may also be affected.
-
 ## Installation
 
 **Recommended:** Python 3.10. The main ROSBD function requires NumPy and scikit-image; the complete repository requirements additionally cover TIFF/whole-slide processing, comparison methods, and figure generation.
@@ -65,8 +63,7 @@ image = np.stack([tifffile.imread(path) for path in channel_files], axis=0)
 corrected, info, background = shared_background_filter(
     image,
     q_b=0.4,
-    q_a=0.4,
-    tv_weight=0.05,
+    q_a=0.4
 )
 
 print("Input:", image.shape)
@@ -169,17 +166,3 @@ Tile filenames are derived from their upper-left `x_y` coordinates. **TIFF files
 - [`data/patch_mIF.py`](data/patch_mIF.py) generates tissue-filtered patch coordinates from selected nuclear/reference images. **Setup caveat:** the current script imports `utils.patching_wsi`, which is not included as a package in this repository; that dependency must be provided or the import adapted before using the script.
 - [`baseline/`](baseline/) contains comparison implementations for BaSiC, CLEAR-AF, LMSF, and Sauvola; the corresponding WSI launchers are provided at the repository root.
 - [`figs/fig_2/`](figs/fig_2/) and [`figs/fig_6/`](figs/fig_6/) contain plotting scripts and exported CSV summaries. For example, `python figs/fig_2/fig.py` generates figure files from the CSVs in that directory. The CSV-based figure regeneration is **not** an end-to-end rerun of the upstream image processing or Nimbus inference.
-
-## Evaluation and scope
-
-The manuscript evaluates ROSBD with image-level background agreement on colorectal cancer Orion and CyCIF datasets, visual comparisons on breast TMA images without matched AF references, and downstream marker-classification comparisons using matched COMET–Xenium data.
-
-Background agreement is assessed against available AF-associated reference images; **these references do not establish per-channel ground-truth contamination**. Raw-reference PSNR measures the magnitude of intensity changes relative to the acquired image, **not** correction accuracy. The COMET–Xenium cellular evaluation uses transcript-derived weak labels, which are **not** protein-expression ground truth. Gains in identifying weak-negative cells may be accompanied by lower positive recall for some markers.
-
-This repository currently provides the ROSBD algorithm, dataset-specific image-processing utilities, baseline implementations, and selected plotting data/scripts. It does **not** include a packaged, end-to-end Nimbus training or inference pipeline for independently regenerating all cellular classification results.
-
-## License and support
-
-A `LICENSE` file is **not currently included** in this repository. Please do not assume that a particular open-source license applies; the maintainers should add an explicit license before external redistribution or reuse under a specific license.
-
-For questions, issues, or reproducibility reports, use the [GitHub repository](https://github.com/lyotvincent/ROSBD) and its issue tracker.

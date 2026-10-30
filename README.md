@@ -149,6 +149,6 @@ Tile filenames are derived from their upper-left `x_y` coordinates. **TIFF files
 ## Data preparation and comparison scripts
 
 - [`data/split_orion_channels.py`](data/split_orion_channels.py) and [`data/split_cycif_channels.py`](data/split_cycif_channels.py) provide channel-splitting utilities for the supported OME-TIFF layouts. The CyCIF script requires a channel-name text file.
-- [`data/patch_mIF.py`](data/patch_mIF.py) generates tissue-filtered patch coordinates from selected nuclear/reference images. **Setup caveat:** the current script imports `utils.patching_wsi`, which is not included as a package in this repository; that dependency must be provided or the import adapted before using the script.
+- [`data/patch_mIF.py`](data/patch_mIF.py) generates tissue-filtered patch coordinates from selected nuclear/reference images.
 - [`baseline/`](baseline/) contains comparison implementations for BaSiC, CLEAR-AF, LMSF, and Sauvola; the corresponding WSI launchers are provided at the repository root.
-- [`figs/fig_2/`](figs/fig_2/) and [`figs/fig_6/`](figs/fig_6/) contain plotting scripts and exported CSV summaries. For example, `python figs/fig_2/fig.py` generates figure files from the CSVs in that directory. The CSV-based figure regeneration is **not** an end-to-end rerun of the upstream image processing or Nimbus inference.
+- [`figs/fig_2/`](figs/fig_2/) and [`figs/fig_6/`](figs/fig_6/) contain plotting scripts and exported CSV summaries. For example, `python figs/fig_2/fig.py` generates figure files from the CSVs in that directory.

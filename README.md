@@ -14,18 +14,6 @@ ROSBD is intended for quantitative spatial protein imaging in settings where dif
 - **Intensity-preserving workflow:** return corrected images and estimated background in the input's original intensity units (as `float32` arrays).
 - **Tile-based processing:** apply the core method directly to NumPy arrays or use the repository's dataset-specific whole-slide processing scripts.
 
-## How ROSBD works
-
-For a set of co-registered channels, ROSBD models the observed intensity at pixel $p$ and channel $c$ as
-
-$$
-I_{pc} = b_p a_c + s_{pc},
-$$
-
-where $b_p$ is a shared, nonnegative spatial background field, $a_c$ is its channel-specific amplitude, and $s_{pc}$ is the residual fluorescence signal.
-
-The implementation in [`method.py`](method.py) first performs robust per-channel normalization. It then alternates between lower-quantile estimates of the spatial field and channel coefficients, applies TV regularization to the spatial field, and reconstructs a nonnegative background estimate for each channel. The estimated background is bounded by the observed intensity before subtraction. The final corrected image and estimated background are returned in the original intensity scale.
-
 ## Installation
 
 **Recommended:** Python 3.10. The main ROSBD function requires NumPy and scikit-image; the complete repository requirements additionally cover TIFF/whole-slide processing, comparison methods, and figure generation.
@@ -117,7 +105,7 @@ The repository contains dataset-specific scripts for **Orion**, **CyCIF**, **bre
 
 ### Required data layout and configuration
 
-**Before running the whole-slide scripts:** download and prepare the source images separately, then edit the dataset root paths in the appropriate file under [`dataset/`](dataset/). The published code currently contains machine-specific absolute paths under `/data/wzx/`; it does **not** automatically download datasets or discover arbitrary input directories.
+**Before running the whole-slide scripts:** download and prepare the source images separately, then edit the dataset root paths in the appropriate file under [`dataset/`](dataset/).
 
 - `dataset/orion_dataset.py`: per-sample channel OME-TIFF directories and coordinate files.
 - `dataset/cycif_dataset.py`: per-sample channel OME-TIFF directories and coordinate files.

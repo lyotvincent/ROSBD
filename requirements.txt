@@ -1,0 +1,48 @@
+# ROSBD release dependencies; recommended Python version: 3.10.
+# Includes preprocessing, ROSBD, all four baselines, and quantitative figures.
+# This is a compatible installation specification, not a freeze of the wsi env.
+
+# Numerical and image-processing core.
+# BaSiCPy 2.0.0 requires scipy<1.13; SciPy 1.12 requires numpy<1.29.
+numpy==1.26.4
+scipy==1.12.0
+scikit-image==0.25.2
+pandas==2.3.3
+
+# TIFF decoding, tiled image access, and HDF5 coordinates.
+h5py==3.16.0
+tifffile==2025.5.10
+imagecodecs==2025.3.30
+zarr==2.18.3
+numcodecs==0.13.1
+openslide-python==1.4.3
+openslide-bin==4.0.0.12
+# Install one OpenCV distribution only; no OpenCV GUI functions are used.
+# OpenCV 4.12+ requires NumPy 2 on Python 3.10.
+opencv-python-headless==4.11.0.86
+Pillow==12.0.0
+
+# Plotting, PDF figure assembly, and worker/thread control.
+matplotlib==3.10.8
+reportlab==4.4.9
+pypdf==6.10.0
+tqdm==4.67.3
+threadpoolctl==3.6.0
+
+# BaSiC: version 2 uses PyTorch, not JAX.
+BaSiCPy==2.0.0
+torch==2.6.0
+torch-dct==0.1.6
+hyperactive==4.8.0
+gradient-free-optimizers==1.13.0
+pydantic==2.12.5
+dask==2026.1.2
+pooch==1.9.0
+
+# CLEAR-AF: retain the upstream revision used by baseline/clear_af.py.
+clearaf @ https://github.com/antoranzlab/CLEAR-AF/archive/a681dc670ed4600286e87b09600c110459e86a31.tar.gz
+fastdtw==0.3.4
+scikit-learn==1.7.2
+
+# Other transitive dependencies are installed automatically by pip.
+# The standard library and repository-local modules are not PyPI requirements.

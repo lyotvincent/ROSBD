@@ -1,0 +1,11 @@
+{
+    "q_b": 0.4,
+    "q_a": 0.4,
+    "scale_percentile": 99.5,
+    "clip_max": 2.0,
+    "tv_weight": 0.05,
+    "max_iter": 50,
+    "tol": 0.0001,
+    "min_b": 0.0001,
+    "eps": 1e-06
+}

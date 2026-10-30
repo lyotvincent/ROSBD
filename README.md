@@ -132,8 +132,6 @@ python -m ROSBD.run_sdf_wsi_muti_workers \
 
 Replace `YOUR_SAMPLE_ID` and `/path/to/results` with values matching your local data. Set `--task cohort` and omit `--sample-id` to process the indexed cohort. The script accepts `--overwrite` to reprocess existing sample output directories. Its defaults are 512-pixel tiles for COMET and 256-pixel tiles for other datasets if `--tile-size` is omitted; specify tile size explicitly to match your prepared coordinates.
 
-The convenience script [`run_method.sh`](run_method.sh) can also dispatch ROSBD (`METHOD=sdf`) and the baselines, but **must be edited first**: it contains a hard-coded conda environment path, dataset-dependent output path, and a default `METHOD=clearaf`. It is intended as a local experiment launcher, not a zero-configuration command.
-
 ### Saved output layout
 
 For each processed sample, [`utils.save_tile_outputs`](utils.py) saves files under:

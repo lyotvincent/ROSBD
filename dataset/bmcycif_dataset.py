@@ -34,8 +34,8 @@ class BMCyCIFDataset(BaseDataset):
         self.DEFAULT_CHANNELS = [
             "R1_c1", "R1_c2", "R1_c3", "R1_c4", "R1_c5"
         ]
-        self.slide_root = Path(slide_root) if slide_root is not None else Path(
-            "/data/wzx/BM-Her2N75-15"
+        self.slide_root = Path(slide_root) if slide_root is not None else (
+            Path(__file__).resolve().parents[1] / "datasets" / "BM-Her2N75-15"
         )
         self.exclude_samples = set(exclude_samples or ())
         self.af = None

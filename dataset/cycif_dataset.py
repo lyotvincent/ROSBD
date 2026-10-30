@@ -22,7 +22,7 @@ class CyCIFDataset(BaseDataset):
         self.af = "A647"
         exclude_samples = ["LSP17708","LSP17711","LSP17714","LSP17717"]
         self.exclude_samples = set(exclude_samples)
-        data_root = Path("/data/wzx/wala-christensen-2026-pik3ca-crc")
+        data_root = Path(__file__).resolve().parents[1] / "datasets" / "wala-christensen-2026-pik3ca-crc"
         self.slide_root = Path(slide_root) if slide_root is not None else data_root / "cycif_sp"
         default_coord_root = coord_root is None
         if coord_root is None:

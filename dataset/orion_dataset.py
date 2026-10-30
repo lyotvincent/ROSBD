@@ -22,7 +22,7 @@ class OrionDataset(BaseDataset):
             "09_CD8a_ArgoFluor602", "11_PD-L1_ArgoFluor662",
         ]
         self.af = '02_AF1'
-        data_root = Path("/data/wzx/wala-christensen-2026-pik3ca-crc")
+        data_root = Path(__file__).resolve().parents[1] / "datasets" / "wala-christensen-2026-pik3ca-crc"
         self.slide_root = Path(slide_root) if slide_root is not None else data_root / "orion_sp"
         if coord_root is None:
             coord_root = {

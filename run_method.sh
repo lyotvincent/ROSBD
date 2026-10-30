@@ -6,11 +6,16 @@ SAMPLE_ID="BM-Her2N75-15-Scene-059"  # Ignored in cohort mode
 TILE_SIZE=512              # COMET coordinates use 512-pixel tiles; match the existing tile size for other datasets
 WORKER=16
 OVERWRITE=${OVERWRITE:-False} # False: skip existing sample directories; True: reprocess
-SAVE_DIR="/data/wzx/mIFDec/${DATASET}_compare/${METHOD}"
+SAVE_DIR="outputs/${DATASET}_compare/${METHOD}"
 FIT_SAMPLES=128             # BaSiC only: maximum fitting inputs (complete views for BM, tiles otherwise)
-CONDA_ROOT=/home/wzx/miniconda3
+PYTHON=${PYTHON:-python}    # Python executable from the active environment
 
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+# Resolve relative output paths from the release directory before changing cwd.
+case "$SAVE_DIR" in
+    /*) ;;
+    *) SAVE_DIR="$SCRIPT_DIR/$SAVE_DIR" ;;
+esac
 PACKAGE_NAME=${SCRIPT_DIR##*/}
 cd "$SCRIPT_DIR/.."
 case "$DATASET" in
@@ -55,4 +60,4 @@ if [ "$METHOD" = basic ]; then
 fi
 
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
-exec "$CONDA_ROOT/envs/wsi/bin/python" "$@"
+exec "$PYTHON" "$@"

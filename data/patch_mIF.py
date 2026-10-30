@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--mif-dir",
         "-d",
-        default="/data/wzx/BM-Her2N75-15",
+        default=Path(__file__).resolve().parents[1] / "datasets" / "BM-Her2N75-15",
         type=Path,
     )
     parser.add_argument(

@@ -13,7 +13,7 @@ class CometDataset(BaseDataset):
                 'αSMA', 'CD45', 'HepPar1', 'CD206']
 
     def __init__(self, slide_root=None, coord_root=None, annotation_root=None):
-        root = Path('/data/wzx/COMET')
+        root = Path(__file__).resolve().parents[1] / "datasets" / "COMET"
         self.RNA_MARKERS = {'CD20': 'MS4A1', 'CD1c': 'CD1C', 'CD206': 'MRC1',
                             'E-cadherin': 'CDH1', 'FXIIIa': 'F13A1', 'IL-10': 'IL10',
                             'Podoplanin': 'PDPN', 'HepPar1': 'CPS1'}

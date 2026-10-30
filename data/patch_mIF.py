@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""Generate patch coordinates from DAPI/Hoechst or BM-CyCIF reference TIFFs."""
-
-from __future__ import annotations
-
 import argparse
 import multiprocessing as mp
 import os
@@ -17,7 +12,7 @@ import tifffile
 from PIL import Image
 from tqdm import tqdm
 
-from utils.patching_wsi import get_patch_tissue_ratio
+from .patching_wsi import get_patch_tissue_ratio
 
 # Match both Orion Hoechst naming variants and only the first CyCIF round.
 DEFAULT_DAPI_REGEX = r"(?:dapi|hoechst(?:1)?(?:\D|$)|nucleus[_ -]?hoechst)"
